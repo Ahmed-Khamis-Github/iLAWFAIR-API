@@ -6,6 +6,10 @@ use App\Http\Controllers\Api\Authentication\UserLogin;
 use App\Http\Controllers\Api\Authentication\UserRegister;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\CategoryController;
+use App\Http\Controllers\Api\BookController;
+use App\Http\Controllers\Api\AuthorController ;
+use App\Http\Controllers\Api\PublishingHouseController as ApiPublishingHouseController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,7 +26,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-
+// Auth 
 Route::post('user-register', [UserRegister::class, 'register']);
 
 Route::post('user-login', [UserLogin::class, 'login']);
@@ -30,3 +34,14 @@ Route::post('user-login', [UserLogin::class, 'login']);
 Route::post('password/change', [ChangePasswordController::class, 'changePassword']) ;
 
 Route::put('user/update', [UpdateProfileController::class, 'update']) ;
+
+// -------------------------------------------------------------------
+
+Route::get('main-categories', [CategoryController::class, 'mainCategories']);
+Route::get('sub-categories/{category}', [CategoryController::class, 'subCategories']);
+Route::get('books', [BookController::class, 'index']);
+Route::get('books/category/{category}', [BookController::class, 'booksByCategory']);
+Route::get('books/publishing-house/{publishingHouse}', [BookController::class, 'booksByPublishingHouse']);
+Route::get('authors', [AuthorController::class, 'index']);
+Route::get('authors/{author}/books', [AuthorController::class, 'booksByAuthor']);
+Route::get('publishing-houses', [ApiPublishingHouseController::class, 'index']);
