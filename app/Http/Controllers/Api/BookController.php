@@ -39,4 +39,30 @@ public function booksByPublishingHouse(PublishingHouse $publishingHouse)
     $booksResource = BookResource::collection($books);
     return ApiResponse::sendResponse(200, 'Books retrieved successfully for the specified publishing house', $booksResource);
 }
+
+
+
+
+public function download($id)
+{
+    $book = Book::findOrFail($id);
+    $filePath = public_path("books/{$book->file_path}");
+
+    return response()->download($filePath, "{$book->title}.pdf");
+}
+
+
+
+public function search(Request $request)
+{
+    $query = $request->get('query');
+
+    $books = Book::where('title', 'like', "%$query%")
+                ->get();
+
+     $booksResource = BookResource::collection($books);
+
+    return ApiResponse::sendResponse(200, 'Books retrieved successfully', $booksResource);
+}
+
 }

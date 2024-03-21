@@ -19,6 +19,7 @@ class PublishingHouseResource extends JsonResource
             'name' => $this->name,
             'address' => $this->address,
             'email' => $this->email,
+            'image' => $this->image,
             'phone' => $this->phone,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,

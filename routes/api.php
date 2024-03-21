@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\BookController;
-use App\Http\Controllers\Api\AuthorController ;
+use App\Http\Controllers\Api\AuthorController;
 use App\Http\Controllers\Api\PublishingHouseController as ApiPublishingHouseController;
 
 /*
@@ -31,9 +31,9 @@ Route::post('user-register', [UserRegister::class, 'register']);
 
 Route::post('user-login', [UserLogin::class, 'login']);
 
-Route::post('password/change', [ChangePasswordController::class, 'changePassword']) ;
+Route::post('password/change', [ChangePasswordController::class, 'changePassword']);
 
-Route::put('user/update', [UpdateProfileController::class, 'update']) ;
+Route::put('user/update', [UpdateProfileController::class, 'update']);
 
 // -------------------------------------------------------------------
 
@@ -43,5 +43,11 @@ Route::get('books', [BookController::class, 'index']);
 Route::get('books/category/{category}', [BookController::class, 'booksByCategory']);
 Route::get('books/publishing-house/{publishingHouse}', [BookController::class, 'booksByPublishingHouse']);
 Route::get('authors', [AuthorController::class, 'index']);
+Route::get('authors/search', [AuthorController::class, 'search']);
 Route::get('authors/{author}/books', [AuthorController::class, 'booksByAuthor']);
 Route::get('publishing-houses', [ApiPublishingHouseController::class, 'index']);
+Route::get('publishing-houses/search', [ApiPublishingHouseController::class, 'search']);
+
+Route::get('books/search', [BookController::class, 'search']);
+
+Route::get('/books/{id}', [BookController::class, 'download']);

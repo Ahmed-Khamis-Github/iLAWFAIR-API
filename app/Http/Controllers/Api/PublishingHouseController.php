@@ -24,4 +24,19 @@ class PublishingHouseController extends Controller
         return ApiResponse::sendResponse(200, 'Publishing houses retrieved successfully', $publishingHousesResource);
     }
 
+
+    public function search(Request $request)
+    {
+        $query = $request->get('query');
+
+        $publishingHouses = PublishingHouse::where('name', 'like', "%$query%")
+                    ->get();
+
+        $publishingHousesResource = PublishingHouseResource::collection($publishingHouses);
+
+        return ApiResponse::sendResponse(200, 'Publishing houses retrieved successfully', $publishingHousesResource);
+    }
+
+    
+
 }

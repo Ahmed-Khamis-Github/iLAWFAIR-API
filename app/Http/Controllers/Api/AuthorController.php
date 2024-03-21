@@ -26,5 +26,18 @@ class AuthorController extends Controller
         return ApiResponse::sendResponse(200, 'Books retrieved successfully for the specified author', $booksResource);
     }
 
+
+    public function search(Request $request)
+    {
+        $query = $request->get('query');
+
+        $authors = Author::where('name', 'like', "%$query%")
+                    ->get();
+
+        $authorsResource = AuthorResource::collection($authors);
+
+        return ApiResponse::sendResponse(200, 'Authors retrieved successfully', $authorsResource);
+    }
+
     
 }
